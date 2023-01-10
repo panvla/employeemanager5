@@ -2,6 +2,7 @@ package com.vladimirpandurov.employeemanager5.controller;
 
 import com.vladimirpandurov.employeemanager5.model.Employee;
 import com.vladimirpandurov.employeemanager5.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+@Slf4j
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -29,11 +31,13 @@ public class EmployeeController {
     }
     @PostMapping("/add")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+        log.info("u add metodi");
         Employee savedEmployee = this.employeeService.addEmployee(employee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
     @PutMapping("/update")
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
+        log.info("u update metodi");
         Employee updatedEmployee = this.employeeService.updateEmployee(employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
     }
